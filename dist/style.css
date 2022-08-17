@@ -28,13 +28,14 @@ body {
 }
 
 #folder,
+.note,
 #content > div {
     box-sizing: border-box;
     background-color: #ececec;
     border-radius: 10px;
     padding: 10px;
     cursor: pointer;
-    min-width: 150px;
+    min-width: 200px;
 }
 
 #folder:hover,
@@ -58,4 +59,8 @@ body {
 
 .remove {
     margin-left: auto;
+}
+
+.note {
+    margin-left: 20px;
 }
