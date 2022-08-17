@@ -12,30 +12,30 @@ const Run = (() => {
         },
         {
             'name': 'Dog',
-            'description': 'Milk, Eggs, Apples'
+            'description': 'Milk'
         },
         {
             'name': 'Cat',
-            'description': 'Milk, Eggs, Apples'
+            'description': 'Milk, Eggs'
         },
         {
             'name': 'Car',
-            'description': 'Milk, Eggs, Apples'
+            'description': 'Apples'
         },
         {
             'name': 'Hey',
-            'description': 'Milk, Eggs, Apples'
+            'description': 'Milkpples'
         },
     ];
 
     const notes1 = [
         {
             'name': '12321321',
-            'description': 'Milk, Eggs, Apples'
+            'description': 'M Eggs, Apples'
         },
         {
             'name': '12412414',
-            'description': 'Milk, Eggs, Apples'
+            'description': 'Mies'
         },
 
     ];
@@ -53,7 +53,7 @@ const Run = (() => {
             'name': 'Books'
         }
     ];
-    console.log(folders);
+
     const showFolders = () => {
         let content = document.getElementById('content')
         content.innerHTML = '';
@@ -74,12 +74,22 @@ const Run = (() => {
             collapse.className = 'collapse';
             collapse.innerText = '⌵';
             div.appendChild(collapse);
+            let rightNote = document.getElementById('note');
             if (folders[i].hasOwnProperty('notes')) {
                 for (const value of folders[i].notes) {
                     let note = document.createElement('div');
                     note.className = 'note';
                     note.innerText = value.name;
                     content.appendChild(note);
+                    let input = document.createElement('input');
+                    note.addEventListener('click', () => {
+                        rightNote.innerHTML = '';
+                        input.value = value.description;
+                        rightNote.appendChild(input);
+                    });
+                    input.addEventListener('keyup', () => {
+                        value.description = input.value;
+                    });
                 }
             }
         }
