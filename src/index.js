@@ -5,26 +5,55 @@ const Run = (() => {
         removeFolder();
     }
 
-    const notes = [
+    const notes0 = [
         {
             'name': 'Shopping list',
             'description': 'Milk, Eggs, Apples'
-        }
-    ]
+        },
+        {
+            'name': 'Dog',
+            'description': 'Milk, Eggs, Apples'
+        },
+        {
+            'name': 'Cat',
+            'description': 'Milk, Eggs, Apples'
+        },
+        {
+            'name': 'Car',
+            'description': 'Milk, Eggs, Apples'
+        },
+        {
+            'name': 'Hey',
+            'description': 'Milk, Eggs, Apples'
+        },
+    ];
+
+    const notes1 = [
+        {
+            'name': '12321321',
+            'description': 'Milk, Eggs, Apples'
+        },
+        {
+            'name': '12412414',
+            'description': 'Milk, Eggs, Apples'
+        },
+
+    ];
 
     const folders = [
         {
             'name': 'ASAP',
-            notes
+            'notes': notes0
         },
         {
-            'name': 'HOT'
+            'name': 'HOT',
+            'notes': notes1
         },
         {
             'name': 'Books'
         }
     ];
-
+    console.log(folders);
     const showFolders = () => {
         let content = document.getElementById('content')
         content.innerHTML = '';
@@ -46,12 +75,14 @@ const Run = (() => {
             collapse.innerText = '⌵';
             div.appendChild(collapse);
             if (folders[i].hasOwnProperty('notes')) {
-                let note = document.createElement('div');
-                note.className = 'note';
-                note.innerText = folders[i].notes[0].name;
-                content.appendChild(note);
+                for (const value of folders[i].notes) {
+                    let note = document.createElement('div');
+                    note.className = 'note';
+                    note.innerText = value.name;
+                    content.appendChild(note);
+                }
             }
-        };
+        }
     }
 
     const createFolder = (name) => {
