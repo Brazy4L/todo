@@ -1,0 +1,61 @@
+body {
+    margin: 0;
+}
+
+#container {
+    height: 100vh;
+    display: grid;
+    grid-template: 1fr / 1fr 3fr;
+}
+
+#sidebar {
+    padding-left: 10px;
+    padding-top: 10px;
+}
+
+#logo {
+    font-size: 48px;
+    text-decoration: line-through;
+    width: 85.34px;
+}
+
+#menu,
+#content {
+    margin-top: 25px;
+    display: grid;
+    gap: 6px;
+    font-size: 24px;
+}
+
+#folder,
+#content > div {
+    box-sizing: border-box;
+    background-color: #ececec;
+    border-radius: 10px;
+    padding: 10px;
+    cursor: pointer;
+    min-width: 150px;
+}
+
+#folder:hover,
+#content > div:hover {
+    background-color: #d8d8d8;
+}
+
+#folder:active,
+#content > div:active {
+    background-color: #cccccc;
+}
+
+#content > div {
+    display: flex;
+    overflow: auto;
+}
+
+#content > div > button {
+    width: 30px;
+}
+
+.remove {
+    margin-left: auto;
+}
