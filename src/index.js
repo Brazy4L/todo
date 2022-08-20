@@ -1,52 +1,27 @@
 const Run = (() => { 
 
     const app = () => {
+        getItems();
         showFolders();
     }
 
-    const notes = [
+    let notes = [
         [
             {
-                'name': 'Shopping list',
-                'description': 'Milk, Eggs, Apples'
-            },
-            {
-                'name': 'Dog',
-                'description': 'Cat'
-            },
-            {
-                'name': 'VS',
-                'description': 'Code'
-            },
-        ],
-        [
-            {
-                'name': 'Books',
-                'description': 'None'
-            },
-        ],
-        [
-            {
-                'name': 'Hey',
-                'description': 'Bye'
+                'name': 'Click this note.',
+                'description': 'Hi! You can create folders by clicking "+ Folder", and then You can add notes to it by clicking green +. Have fun!'
             },
         ],
     ];
 
-    const folders = [
+    let folders = [
         {
-            'name': 'ASAP',
+            'name': 'Welcome!',
             'notes': notes[0]
         },
-        {
-            'name': 'HOT',
-            'notes': notes[1]
-        },
-        {
-            'name': 'Books',
-            'notes': notes[2]
-        },
     ];
+
+    const rightNote = document.getElementById('note');
 
     const showFolders = () => {
         let content = document.getElementById('content')
@@ -63,6 +38,7 @@ const Run = (() => {
             div.appendChild(remove);
 
             remove.addEventListener('click', () => {
+                rightNote.innerHTML = '';
                 folders.splice(i, 1);
                 notes.splice(i, 1);
                 showFolders();
@@ -78,11 +54,6 @@ const Run = (() => {
                 notes[i].push(createNote(name));
                 showFolders();
             });
-            
-            let collapse = document.createElement('button');
-            collapse.className = 'collapse';
-            collapse.innerText = '⌵';
-            div.appendChild(collapse);
         }
         showNotes();
     }
@@ -101,27 +72,33 @@ const Run = (() => {
                 removenote.innerText = '-';
                 note.appendChild(removenote);
 
-                removenote.addEventListener('click', () => {
+                removenote.addEventListener('click', (event) => {
+                    event.stopPropagation();
+                    rightNote.innerHTML = '';
                     notes[i].splice(j, 1);
                     showFolders();
                 });
+
+                let textarea = document.createElement('textarea');
+                note.addEventListener('click', () => {
+                    showActiveNote();
+                    note.classList.add('noteactive');
+                    rightNote.innerHTML = '';
+                    textarea.value = folders[i].notes[j].description;
+                    rightNote.appendChild(textarea);
+                    textarea.focus();
+                });
+                textarea.addEventListener('keyup', () => {
+                    folders[i].notes[j].description = textarea.value;
+                    setItems();
+                });
             }
         }
+        setItems();
+        console.log(folders);
+        console.log(notes);
     }
 
-    const noteText = () => {
-        let rightNote = document.getElementById('note');
-        let textarea = document.createElement('textarea');
-        note.addEventListener('click', () => {
-            rightNote.innerHTML = '';
-            textarea.value = folders[i].notes[j].description;
-            rightNote.appendChild(textarea);
-            textarea.focus();
-        });
-        textarea.addEventListener('keyup', () => {
-            folders[i].notes[j].description = textarea.value;
-        });
-    }
 
     const createFolder = (name, num) => {
         const newFolder = () => {
@@ -141,15 +118,37 @@ const Run = (() => {
         showFolders();
     }
 
-    document.getElementById('folder').addEventListener(('click'), () => {
+    document.getElementById('folder').addEventListener('click', () => {
         addFolder();
     });
 
+    document.getElementById('logo').addEventListener('click', () => {
+        rightNote.innerHTML = '';
+    });
 
     const createNote = (name) => {
         return {
             'name': name,
             'description': '',
+        }
+    }
+
+    const showActiveNote = () => {
+        let allnotes = document.querySelectorAll('.note');
+        allnotes.forEach((anote) => {
+            anote.classList.remove('noteactive');
+        });
+    }
+
+    const setItems = () => {
+        localStorage.notes = JSON.stringify(notes);
+        localStorage.folders = JSON.stringify(folders);
+    }
+
+    const getItems = () => {
+        if (localStorage.folders) {
+        notes = JSON.parse(localStorage.notes);
+        folders = JSON.parse(localStorage.folders);
         }
     }
 
