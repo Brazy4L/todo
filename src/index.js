@@ -123,16 +123,21 @@ const Run = (() => {
         });
     }
 
-    const createFolder = (name) => {
+    const createFolder = (name, num) => {
+        const newFolder = () => {
+            notes.push([]);
+            return notes[num];
+        }
         return {
             'name': name,
-            'notes': '',
+            'notes': newFolder(),
         }
     }
 
     const addFolder = () => {
         let name = prompt('Name:');
-        folders.push(createFolder(name));
+        let l = folders.length;
+        folders.push(createFolder(name, l));
         showFolders();
     }
 
