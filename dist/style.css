@@ -36,7 +36,6 @@ body {
     border-radius: 10px;
     padding: 10px;
     cursor: pointer;
-    min-width: 200px;
 }
 
 #folder:hover,
@@ -77,4 +76,21 @@ body {
     width: 80%;
     height: 80%;
     font-size: 16px;
+}
+
+.folder {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.note {
+    flex-basis: 100%;
+    display: flex;
+    background-color: #b1b1b1;
+    place-self: center;
+}
+
+.note > button {
+    margin-left: auto;
 }
