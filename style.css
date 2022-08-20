@@ -11,6 +11,7 @@ body {
 #sidebar {
     padding-left: 10px;
     padding-top: 10px;
+    overflow: auto;
 }
 
 #logo {
@@ -50,13 +51,13 @@ body {
 
 #content > div {
     display: flex;
-    overflow: auto;
 }
 
 #content > div > button {
     width: 30px;
 }
 
+.removenote,
 .remove {
     margin-left: auto;
 }
@@ -67,13 +68,13 @@ body {
 
 #note {
     display: grid;
-    place-self: center;
     height: 100%;
     width: 100%;
 }
 
-#note > input {
+#note > textarea {
     place-self: center;
     width: 80%;
     height: 80%;
+    font-size: 16px;
 }
