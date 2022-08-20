@@ -12,12 +12,14 @@ body {
     padding-left: 10px;
     padding-top: 10px;
     overflow: auto;
+    min-width: 300px;
 }
 
 #logo {
     font-size: 48px;
     text-decoration: line-through;
     width: 85.34px;
+    cursor: pointer;
 }
 
 #menu,
@@ -28,40 +30,61 @@ body {
     font-size: 24px;
 }
 
+.folder,
 #folder,
-.note,
-#content > div {
+.note {
     box-sizing: border-box;
-    background-color: #ececec;
     border-radius: 10px;
     padding: 10px;
+}
+
+#folder {
     cursor: pointer;
+    background-color: #73ffa2;
 }
 
-#folder:hover,
-#content > div:hover {
-    background-color: #d8d8d8;
+#folder:hover {
+    background-color: #00ff55;
 }
 
-#folder:active,
-#content > div:active {
-    background-color: #cccccc;
+
+.add:active,
+.remove:active,
+.removenote:active,
+#folder:active {
+    transform: translatey(2px);
 }
 
-#content > div {
+.folder {
+    background-color: #ffffff;
     display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
 }
 
-#content > div > button {
+.add,
+.remove,
+.removenote {
+    cursor: pointer;
+    border-radius: 15px;
+    border: none;
+    height: 30px;
     width: 30px;
 }
 
 .removenote,
 .remove {
     margin-left: auto;
+    background-color: #ff6565;
+}
+
+.removenote:hover,
+.remove:hover {
+    background-color: #ff1414;
 }
 
 .note {
+    cursor: pointer;
     margin-left: 20px;
 }
 
@@ -78,19 +101,21 @@ body {
     font-size: 16px;
 }
 
-.folder {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-}
-
 .note {
     flex-basis: 100%;
     display: flex;
-    background-color: #b1b1b1;
+    background-color: #c2fdff;
     place-self: center;
 }
 
-.note > button {
-    margin-left: auto;
+.noteactive {
+    background-color: #00f7ff;
+}
+
+.add {
+    background-color: #73ffa2;
+}
+
+.add:hover {
+    background-color: #00ff55;
 }
