@@ -5,99 +5,110 @@ const Run = (() => {
         removeFolder();
     }
 
-    const notes0 = [
-        {
-            'name': 'Shopping list',
-            'description': 'Milk, Eggs, Apples'
-        },
-        {
-            'name': 'Dog',
-            'description': 'Milk'
-        },
-        {
-            'name': 'Cat',
-            'description': 'Milk, Eggs'
-        },
-        {
-            'name': 'Car',
-            'description': 'Apples'
-        },
-        {
-            'name': 'Hey',
-            'description': 'Milkpples'
-        },
-    ];
+    const notes = [
+        [
+            {
+                'name': 'Shopping list',
+                'description': 'Milk, Eggs, Apples'
+            },
+            {
+                'name': 'Dog',
+                'description': 'Cat'
+            },
+            {
+                'name': 'VS',
+                'description': 'Code'
+            },
+        ],
+        [
+            {
+                'name': 'Books',
+                'description': 'None'
+            },
+        ],
+        [
 
-    const notes1 = [
-        {
-            'name': '12321321',
-            'description': 'M Eggs, Apples'
-        },
-        {
-            'name': '12412414',
-            'description': 'Mies'
-        },
-
+        ],
     ];
 
     const folders = [
         {
             'name': 'ASAP',
-            'notes': notes0
+            'notes': notes[0]
         },
         {
             'name': 'HOT',
-            'notes': notes1
+            'notes': notes[1]
         },
         {
-            'name': 'Books'
-        }
+            'name': 'Books',
+            'notes': notes[2]
+        },
     ];
 
     const showFolders = () => {
         let content = document.getElementById('content')
         content.innerHTML = '';
         for (let i = 0; i < folders.length; i++) {
+            
             let div = document.createElement('div');
-            div.className = 'folder'
+            div.className = 'folder';
             div.innerText = folders[i].name;
             content.appendChild(div);
+            
             let remove = document.createElement('button');
             remove.className = 'remove';
             remove.innerText = '-';
             div.appendChild(remove);
+            
             let add = document.createElement('button');
             add.className = 'add';
             add.innerText = '+';
             div.appendChild(add);
+            
             let collapse = document.createElement('button');
             collapse.className = 'collapse';
             collapse.innerText = '⌵';
             div.appendChild(collapse);
+            
             let rightNote = document.getElementById('note');
-            if (folders[i].hasOwnProperty('notes')) {
-                for (const value of folders[i].notes) {
-                    let note = document.createElement('div');
-                    note.className = 'note';
-                    note.innerText = value.name;
-                    content.appendChild(note);
-                    let input = document.createElement('input');
-                    note.addEventListener('click', () => {
-                        rightNote.innerHTML = '';
-                        input.value = value.description;
-                        rightNote.appendChild(input);
-                    });
-                    input.addEventListener('keyup', () => {
-                        value.description = input.value;
-                    });
-                }
+
+            for (const value of folders[i].notes) {
+
+                let note = document.createElement('div');
+                note.className = 'note';
+                note.innerText = value.name;
+                content.appendChild(note);
+
+                let removenote = document.createElement('button');
+                removenote.className = 'removenote';
+                removenote.innerText = '-';
+                note.appendChild(removenote);
+
+                removenote.addEventListener('click', () => {
+                    notes[i].splice(1, 1);
+                    showFolders();
+                });
+
+                let textarea = document.createElement('textarea');
+                note.addEventListener('click', () => {
+                    rightNote.innerHTML = '';
+                    textarea.value = value.description;
+                    rightNote.appendChild(textarea);
+                    textarea.focus();
+                });
+                
+                textarea.addEventListener('keyup', () => {
+                    value.description = textarea.value;
+                });
             }
         }
     }
 
     const createFolder = (name) => {
         return {
-            'name': name
+            'name': name,
+            'notes': '',
         }
     }
 
@@ -116,9 +127,10 @@ const Run = (() => {
         for (let i = 0; i < folders.length; i++) {
             document.querySelectorAll('.remove')[i].addEventListener('click', () => {
                 folders.splice(i, 1);
+                notes[i] = {};
                 showFolders(); 
                 removeFolder();
-            })
+            });
         }
     }
 
