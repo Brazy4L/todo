@@ -96,6 +96,7 @@ body {
 
 #note > textarea {
     place-self: center;
+    padding: 20px;
     width: 80%;
     height: 80%;
     font-size: 16px;
