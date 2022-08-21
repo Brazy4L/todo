@@ -24,6 +24,7 @@ const Run = (() => {
     const rightNote = document.getElementById('note');
 
     const showFolders = () => {
+        setItems();
         let content = document.getElementById('content')
         content.innerHTML = '';
         for (let i = 0; i < folders.length; i++) {
@@ -41,7 +42,6 @@ const Run = (() => {
                 rightNote.innerHTML = '';
                 folders.splice(i, 1);
                 notes.splice(i, 1);
-                setItems();
                 showFolders();
             });
             
@@ -54,8 +54,7 @@ const Run = (() => {
                 let name = prompt('Name:');
                 if (name === null) {
                 } else { 
-                    notes[i].push(createNote(name));
-                    setItems();
+                    folders[i].notes.push(createNote(name));
                     showFolders();
                 }
             });
@@ -81,7 +80,6 @@ const Run = (() => {
                     event.stopPropagation();
                     rightNote.innerHTML = '';
                     folders[i].notes.splice(j, 1);
-                    setItems();
                     showFolders();
                 });
 
@@ -104,13 +102,14 @@ const Run = (() => {
 
 
     const createFolder = (name, num) => {
+        console.log(name);
         const newFolder = () => {
-            notes.push([]);
+            notes.push([],);
             return notes[num];
         }
         return {
             'name': name,
-            'notes': newFolder(),
+            'notes': newFolder()
         }
     }
 
@@ -121,7 +120,6 @@ const Run = (() => {
             let l = folders.length;
             folders.push(createFolder(name, l));
             showFolders();
-            setItems();
         }
     }
 
@@ -136,7 +134,7 @@ const Run = (() => {
     const createNote = (name) => {
         return {
             'name': name,
-            'description': '',
+            'description': ''
         }
     }
 
