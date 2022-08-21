@@ -9,7 +9,7 @@ const Run = (() => {
         [
             {
                 'name': 'Click this note.',
-                'description': 'Hi!\nYou can: create folders by clicking "+ Folder"\n         create notes by clicking green "+"\n         remove folder (including its notes) by clicking red "-" alongside the folder\n         remove individual note by clicking red "-" alongside the note\nHave fun!'
+                'description': 'Hi!\nYou can: create folders by clicking "+ Folder"\n             create notes by clicking green "+"\n             remove folder (including its notes) by clicking red "-" alongside the folder\n             remove individual note by clicking red "-" alongside the note\nHave fun!'
             },
         ],
     ];
@@ -83,17 +83,29 @@ const Run = (() => {
                     showFolders();
                 });
 
-                let textarea = document.createElement('textarea');
+                let noteName = document.createElement('textarea');
+                let mainText = document.createElement('textarea');
                 note.addEventListener('click', () => {
                     showActiveNote();
                     note.classList.add('noteactive');
                     rightNote.innerHTML = '';
-                    textarea.value = folders[i].notes[j].description;
-                    rightNote.appendChild(textarea);
-                    textarea.focus();
+                    noteName.className = 'notename';
+                    noteName.value = folders[i].notes[j].name;
+                    rightNote.appendChild(noteName);
+                    mainText.className = 'maintext';
+                    mainText.value = folders[i].notes[j].description;
+                    rightNote.appendChild(mainText);
+                    mainText.focus();
                 });
-                textarea.addEventListener('keyup', () => {
-                    folders[i].notes[j].description = textarea.value;
+                noteName.addEventListener('keyup', () => {
+                    folders[i].notes[j].name = noteName.value;
+                    note.innerText = noteName.value;
+                    note.appendChild(removenote);
+                    setItems();
+                });
+                mainText.addEventListener('keyup', () => {
+                    folders[i].notes[j].description = mainText.value;
+                    console.log(notes);
                     setItems();
                 });
             }
@@ -128,6 +140,7 @@ const Run = (() => {
     });
 
     document.getElementById('logo').addEventListener('click', () => {
+        showActiveNote();
         rightNote.innerHTML = '';
     });
 

@@ -1,3 +1,13 @@
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans&display=swap');
+
+* {
+    font-family: 'Josefin Sans', sans-serif;
+}
+
+button {
+    padding: 0;
+}
+
 body {
     margin: 0;
 }
@@ -5,14 +15,33 @@ body {
 #container {
     height: 100vh;
     display: grid;
-    grid-template: 1fr / 1fr 3fr;
+    grid-template: 1fr / 300px 1fr;
+    gap: 20px;
 }
 
 #sidebar {
+    background-color: #dbdbdb;
     padding-left: 10px;
     padding-top: 10px;
-    overflow: auto;
-    min-width: 300px;
+    padding-right: 16px;
+    overflow-y: overlay;
+    width: 100%;
+}
+
+::-webkit-scrollbar {
+    width: 6px;
+}
+
+::-webkit-scrollbar-track {
+    background: #dbdbdb; 
+}
+
+::-webkit-scrollbar-thumb {
+    background: #888; 
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #555; 
 }
 
 #logo {
@@ -56,25 +85,32 @@ body {
 }
 
 .folder {
-    background-color: #ffffff;
+    background-color: #f4f4f4;
     display: flex;
     flex-wrap: wrap;
     gap: 10px;
+    word-break: break-all;
 }
 
 .add,
 .remove,
 .removenote {
+    box-sizing: border-box;
+    font-size: 24px;
+    width: 26px;
+    height: 26px;
     cursor: pointer;
-    border-radius: 15px;
+    border-radius: 100%;
     border: none;
-    height: 30px;
-    width: 30px;
 }
 
-.removenote,
 .remove {
     margin-left: auto;
+    background-color: #ff6565;
+}
+
+.removenote {
+    grid-area: 1 / 2 / 2 / 3;
     background-color: #ff6565;
 }
 
@@ -86,27 +122,66 @@ body {
 .note {
     cursor: pointer;
     margin-left: 20px;
+    word-break: break-all;
+    width: 100%;
+    display: grid;
+    grid-template: 1fr / 1fr 26px;
+    background-color: #c2fdff;
+}
+
+.note:hover {
+    background-color: #00f7ff;
 }
 
 #note {
     display: grid;
+    box-sizing: border-box;
     height: 100%;
     width: 100%;
+    grid-template: 127px 1fr / 1fr;
+    padding: 10px 10% 10px 10%;
 }
 
-#note > textarea {
-    place-self: center;
+.notename {
+    box-sizing: border-box;
+    justify-self: center;
+    align-self: end;
+    width: 100%;
+    height: 53px;
+    padding: 8px 6px 6px 6px;
+    font-size: 32px;
+    resize: none;
+    border: none;
+    border-bottom: solid 2px #000000;
+    transition: box-shadow ease-out 0.25s, background-color ease-out 0.8s, border-right ease-out 0.10s;
+}
+
+.notename:focus {
+    border-right: solid 2px black;
+    outline: none;
+    transition: box-shadow ease-out 0.25s, background-color ease-out 0.8s, border-right ease-out 0.10s;
+    background-color: #eeeeee;
+    box-shadow: 8px -2px 4px 0px #00000080;
+  }
+
+.maintext {
+    box-sizing: border-box;
+    justify-self: center;
     padding: 20px;
-    width: 80%;
-    height: 80%;
-    font-size: 16px;
+    width: 100%;
+    height: 90%;
+    font-size: 24px;
+    resize: none;
+    border: none;
+    transition: box-shadow ease-out 0.25s, background-color ease-out 0.8s, border-right ease-out 0.10s;
 }
 
-.note {
-    flex-basis: 100%;
-    display: flex;
-    background-color: #c2fdff;
-    place-self: center;
+.maintext:focus {
+    border-right: solid 2px black;
+    outline: none;
+    transition: box-shadow ease-out 0.25s, background-color ease-out 0.8s, border-right ease-out 0.10s;
+    background-color: #eeeeee;
+    box-shadow: 8px 2px 4px 0px #00000080;
 }
 
 .noteactive {
