@@ -41,6 +41,7 @@ const Run = (() => {
                 rightNote.innerHTML = '';
                 folders.splice(i, 1);
                 notes.splice(i, 1);
+                setItems();
                 showFolders();
             });
             
@@ -51,8 +52,12 @@ const Run = (() => {
 
             add.addEventListener('click', () => {
                 let name = prompt('Name:');
-                notes[i].push(createNote(name));
-                showFolders();
+                if (name === null) {
+                } else { 
+                    notes[i].push(createNote(name));
+                    setItems();
+                    showFolders();
+                }
             });
         }
         showNotes();
@@ -75,7 +80,8 @@ const Run = (() => {
                 removenote.addEventListener('click', (event) => {
                     event.stopPropagation();
                     rightNote.innerHTML = '';
-                    notes[i].splice(j, 1);
+                    folders[i].notes.splice(j, 1);
+                    setItems();
                     showFolders();
                 });
 
@@ -94,9 +100,6 @@ const Run = (() => {
                 });
             }
         }
-        setItems();
-        console.log(folders);
-        console.log(notes);
     }
 
 
@@ -113,9 +116,13 @@ const Run = (() => {
 
     const addFolder = () => {
         let name = prompt('Name:');
-        let l = folders.length;
-        folders.push(createFolder(name, l));
-        showFolders();
+        if (name === null) {
+        } else { 
+            let l = folders.length;
+            folders.push(createFolder(name, l));
+            showFolders();
+            setItems();
+        }
     }
 
     document.getElementById('folder').addEventListener('click', () => {
@@ -141,6 +148,7 @@ const Run = (() => {
     }
 
     const setItems = () => {
+        localStorage.clear();
         localStorage.notes = JSON.stringify(notes);
         localStorage.folders = JSON.stringify(folders);
     }
