@@ -9,7 +9,7 @@ const Run = (() => {
         [
             {
                 'name': 'Click this note.',
-                'description': 'Hi! You can create folders by clicking "+ Folder", and then You can add notes to it by clicking green +. Have fun!'
+                'description': 'Hi!\nYou can: create folders by clicking "+ Folder"\n         create notes by clicking green "+"\n         remove folder (including its notes) by clicking red "-" alongside the folder\n         remove individual note by clicking red "-" alongside the note\nHave fun!'
             },
         ],
     ];
