@@ -54,12 +54,15 @@ const Run = (() => {
             div.appendChild(add);
 
             add.addEventListener('click', () => {
-                let name = prompt('Name:');
-                if (name === null) {
-                } else { 
-                    folders[i].notes.push(createNote(name));
-                    showFolders();
-                }
+                folders[i].notes.push(createNote());
+                showFolders();
+                let currentNotesLength = folders[i].notes.length;
+                let clickIt = document.querySelector(`#content > div:nth-child(${i + 1}) > div:nth-child(${currentNotesLength + 2})`);
+                clickIt.click();
+                let noteName = document.getElementsByClassName('notename');
+                for (let i = 0; i < noteName.length; i++) {
+                    noteName.item(i).focus();
+                 }
             });
         }
         showNotes();
@@ -164,9 +167,9 @@ const Run = (() => {
         rightNote.innerHTML = '';
     });
 
-    const createNote = (name) => {
+    const createNote = () => {
         return {
-            'name': name,
+            'name': '',
             'description': '',
             'created': '',
             'lastedited': ''
