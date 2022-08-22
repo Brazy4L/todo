@@ -76,10 +76,6 @@ body {
     background-color: #00ff55;
 }
 
-
-.add:active,
-.remove:active,
-.removenote:active,
 #folder:active {
     transform: translatey(2px);
 }
@@ -93,6 +89,7 @@ body {
 }
 
 .add,
+.rename,
 .remove,
 .removenote {
     box-sizing: border-box;
@@ -104,19 +101,32 @@ body {
     border: none;
 }
 
-.remove {
+.rename {
     margin-left: auto;
-    background-color: #ff6565;
+    font-size: 24px;
+    display: grid;
+    place-content: center;
+}
+
+.remove {
+    font-size: 27px;
+    display: grid;
+    place-content: center;
+    transition: background-color ease 0.55s;;
 }
 
 .removenote {
     grid-area: 1 / 2 / 2 / 3;
-    background-color: #ff6565;
+    font-size: 27px;
+    display: grid;
+    place-content: center;
+    transition: background-color ease-out 0.35s;;
 }
 
 .removenote:hover,
 .remove:hover {
-    background-color: #ff1414;
+    transition: background-color ease-out 0.35s;;
+    background-color: #f92f60;
 }
 
 .note {
@@ -189,11 +199,15 @@ body {
 }
 
 .add {
-    background-color: #73ffa2;
+    font-size: 27px;
+    display: grid;
+    place-content: center;
+    transition: transform ease 0.55s;
 }
 
 .add:hover {
-    background-color: #00ff55;
+    transition: transform ease 0.55s;
+    transform: rotate(360deg);
 }
 
 .lastedited {
@@ -201,6 +215,7 @@ body {
     grid-template: 1fr 1fr / 1fr;
     justify-self: end;
     align-self: center;
+    gap: 4px;
 }
 
 .edited {

@@ -36,9 +36,14 @@ const Run = (() => {
             div.innerText = folders[i].name;
             content.appendChild(div);
             
+            let rename = document.createElement('button');
+            rename.className = 'rename';
+            rename.innerText = '✏️';
+            div.appendChild(rename);
+
             let remove = document.createElement('button');
             remove.className = 'remove';
-            remove.innerText = '-';
+            remove.innerText = '📛';
             div.appendChild(remove);
 
             remove.addEventListener('click', () => {
@@ -47,17 +52,17 @@ const Run = (() => {
                 notes.splice(i, 1);
                 showFolders();
             });
-            
+
             let add = document.createElement('button');
             add.className = 'add';
-            add.innerText = '+';
+            add.innerText = '✖️';
             div.appendChild(add);
 
             add.addEventListener('click', () => {
                 folders[i].notes.push(createNote());
                 showFolders();
                 let currentNotesLength = folders[i].notes.length;
-                let clickIt = document.querySelector(`#content > div:nth-child(${i + 1}) > div:nth-child(${currentNotesLength + 2})`);
+                let clickIt = document.querySelector(`#content > div:nth-child(${i + 1}) > div:nth-child(${currentNotesLength + 3})`);
                 clickIt.click();
                 let noteName = document.getElementsByClassName('notename');
                 for (let i = 0; i < noteName.length; i++) {
@@ -79,7 +84,7 @@ const Run = (() => {
 
                 let removenote = document.createElement('button');
                 removenote.className = 'removenote';
-                removenote.innerText = '-';
+                removenote.innerText = '📛';
                 note.appendChild(removenote);
 
                 removenote.addEventListener('click', (event) => {
