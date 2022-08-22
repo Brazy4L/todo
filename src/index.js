@@ -1,5 +1,6 @@
-const Run = (() => { 
+import { format } from 'date-fns';
 
+const Run = (() => {
     const app = () => {
         getItems();
         showFolders();
@@ -9,7 +10,9 @@ const Run = (() => {
         [
             {
                 'name': 'Click this note.',
-                'description': 'Hi!\nYou can: create folders by clicking "+ Folder"\n             create notes by clicking green "+"\n             remove folder (including its notes) by clicking red "-" alongside the folder\n             remove individual note by clicking red "-" alongside the note\nHave fun!'
+                'description': 'Hi!\n\n              Create folders by clicking "+ Folder"\n              Create notes by clicking green "+"\n\nHave fun!',
+                'created': '',
+                'lastedited': ''
             },
         ],
     ];
@@ -85,6 +88,9 @@ const Run = (() => {
 
                 let noteName = document.createElement('textarea');
                 let mainText = document.createElement('textarea');
+                let lastedited = document.createElement('div');
+                let created = document.createElement('div');
+                let edited = document.createElement('div');
                 note.addEventListener('click', () => {
                     showActiveNote();
                     note.classList.add('noteactive');
@@ -96,16 +102,31 @@ const Run = (() => {
                     mainText.value = folders[i].notes[j].description;
                     rightNote.appendChild(mainText);
                     mainText.focus();
+                    lastedited.className = 'lastedited';
+                    rightNote.appendChild(lastedited);
+                    created.className = 'created';
+                    if (folders[i].notes[j].created === '') {
+                    folders[i].notes[j].created = format(new Date(), "yyyy-MM-dd HH:mm:ss");
+                    folders[i].notes[j].lastedited = format(new Date(), "yyyy-MM-dd HH:mm:ss");
+                    }
+                    created.innerText = 'Created: ' + folders[i].notes[j].created;
+                    edited.className = 'edited';
+                    edited.innerText = 'Edited:' + `${'\xa0'.repeat(3)}` + folders[i].notes[j].lastedited;
+                    lastedited.appendChild(edited);
+                    lastedited.appendChild(created);
                 });
-                noteName.addEventListener('keyup', () => {
+                noteName.addEventListener('input', () => {
                     folders[i].notes[j].name = noteName.value;
                     note.innerText = noteName.value;
                     note.appendChild(removenote);
+                    folders[i].notes[j].lastedited = format(new Date(), "yyyy-MM-dd HH:mm:ss");
+                    edited.innerHTML = 'Edited:' + `${'\xa0'.repeat(3)}` + folders[i].notes[j].lastedited;
                     setItems();
                 });
-                mainText.addEventListener('keyup', () => {
+                mainText.addEventListener('input', () => {
                     folders[i].notes[j].description = mainText.value;
-                    console.log(notes);
+                    folders[i].notes[j].lastedited = format(new Date(), "yyyy-MM-dd HH:mm:ss");
+                    edited.innerText = 'Edited:' + `${'\xa0'.repeat(3)}` + folders[i].notes[j].lastedited;
                     setItems();
                 });
             }
@@ -114,7 +135,6 @@ const Run = (() => {
 
 
     const createFolder = (name, num) => {
-        console.log(name);
         const newFolder = () => {
             notes.push([],);
             return notes[num];
@@ -147,7 +167,9 @@ const Run = (() => {
     const createNote = (name) => {
         return {
             'name': name,
-            'description': ''
+            'description': '',
+            'created': '',
+            'lastedited': ''
         }
     }
 
