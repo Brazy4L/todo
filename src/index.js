@@ -33,18 +33,47 @@ const Run = (() => {
         for (let i = 0; i < folders.length; i++) {
             let div = document.createElement('div');
             div.className = 'folder';
-            div.innerText = folders[i].name;
             content.appendChild(div);
-            
+
+            let foldername = document.createElement('div');
+            foldername.className = 'foldername';
+            foldername.innerText = folders[i].name;
+            div.appendChild(foldername);
+
+            let renamefolder = document.createElement('textarea');
+            renamefolder.className = 'renamefolder';
+            div.appendChild(renamefolder);
+
+            let buttons = document.createElement('div');
+            buttons.className = 'buttons';
+            div.appendChild(buttons);
+
             let rename = document.createElement('button');
             rename.className = 'rename';
             rename.innerText = '✏️';
-            div.appendChild(rename);
+            buttons.appendChild(rename);
+
+            rename.addEventListener('click', () => {
+                if (renamefolder.classList.contains('show')) {
+                    renamefolder.classList.remove('show');
+                    foldername.innerText = renamefolder.value;
+                    rename.innerText = '✏️';
+                } else {
+                    renamefolder.value = folders[i].name;
+                    renamefolder.classList.add('show');
+                    renamefolder.focus();
+                    rename.innerText = '💾';
+                }
+                renamefolder.addEventListener('input', () => {
+                    folders[i].name = renamefolder.value;
+                    setItems();
+                });
+            });
 
             let remove = document.createElement('button');
             remove.className = 'remove';
-            remove.innerText = '📛';
-            div.appendChild(remove);
+            remove.innerText = '➖';
+            buttons.appendChild(remove);
 
             remove.addEventListener('click', () => {
                 rightNote.innerHTML = '';
@@ -56,7 +85,7 @@ const Run = (() => {
             let add = document.createElement('button');
             add.className = 'add';
             add.innerText = '✖️';
-            div.appendChild(add);
+            buttons.appendChild(add);
 
             add.addEventListener('click', () => {
                 folders[i].notes.push(createNote());
@@ -67,7 +96,7 @@ const Run = (() => {
                 let noteName = document.getElementsByClassName('notename');
                 for (let i = 0; i < noteName.length; i++) {
                     noteName.item(i).focus();
-                 }
+                }
             });
         }
         showNotes();
@@ -84,7 +113,7 @@ const Run = (() => {
 
                 let removenote = document.createElement('button');
                 removenote.className = 'removenote';
-                removenote.innerText = '📛';
+                removenote.innerText = '➖';
                 note.appendChild(removenote);
 
                 removenote.addEventListener('click', (event) => {
