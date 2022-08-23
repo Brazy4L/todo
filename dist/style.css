@@ -2,6 +2,23 @@
 
 * {
     font-family: 'Josefin Sans', sans-serif;
+    box-sizing: border-box;
+}
+
+::-webkit-scrollbar {
+    width: 6px;
+}
+
+::-webkit-scrollbar-track {
+    background: #dbdbdb; 
+}
+
+::-webkit-scrollbar-thumb {
+    background: #888888; 
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #555555; 
 }
 
 button {
@@ -15,33 +32,16 @@ body {
 #container {
     height: 100vh;
     display: grid;
-    grid-template: 1fr / 300px 1fr;
+    grid-template: 1fr / 360px 1fr;
     gap: 20px;
 }
 
 #sidebar {
-    background-color: #dbdbdb;
-    padding-left: 10px;
-    padding-top: 10px;
-    padding-right: 16px;
+    background-color: #eeeeee;
+    padding: 10px 16px 0 10px;
     overflow-y: overlay;
     width: 100%;
-}
-
-::-webkit-scrollbar {
-    width: 6px;
-}
-
-::-webkit-scrollbar-track {
-    background: #dbdbdb; 
-}
-
-::-webkit-scrollbar-thumb {
-    background: #888; 
-}
-
-::-webkit-scrollbar-thumb:hover {
-    background: #555; 
+    box-shadow: 8px 0px 4px 0px #00000080;
 }
 
 #logo {
@@ -49,25 +49,24 @@ body {
     text-decoration: line-through;
     width: 85.34px;
     cursor: pointer;
+    transition: text-decoration-color ease 1s;
 }
 
-#menu,
-#content {
+#logo:hover {
+    transition: text-decoration-color ease 0.36s;
+    text-decoration-color: transparent;
+}
+
+#menu {
     margin-top: 25px;
     display: grid;
     gap: 6px;
     font-size: 24px;
 }
 
-.folder,
-#folder,
-.note {
-    box-sizing: border-box;
+#folder {
     border-radius: 10px;
     padding: 10px;
-}
-
-#folder {
     cursor: pointer;
     background-color: #73ffa2;
 }
@@ -80,61 +79,132 @@ body {
     transform: translatey(2px);
 }
 
-.folder {
-    background-color: #f4f4f4;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    word-break: break-all;
+#content {
+    margin-top: 25px;
+    display: grid;
+    grid-template: 1fr / 1fr;
+    grid-auto-rows: auto;
+    gap: 12px;
+    font-size: 24px;
 }
 
-.add,
-.rename,
-.remove,
-.removenote {
-    box-sizing: border-box;
+.folder {
+    background-color: #f4f4f4;
+    display: grid;
+    grid-template: 40px 1fr / 1fr;
+    grid-auto-rows: auto;
+    gap: 6px;
+    padding: 10px 10px 10px 0;
+    border-radius: 10px;
+}
+
+.foldername {
+    grid-area: 1 / 1 / 2 / 2;
+    align-self: center;
+    width: 170px;
+    overflow-x: hidden;
+    text-overflow: ellipsis;
+    margin: 0 0 0 10px;
+    font-size: 20px;
+    height: 20px;
+}
+
+.foldername:hover {
+    order: 1;
+    overflow: visible; 
+    overflow-wrap: break-word;
+}
+
+.renamefolder {
+    align-self: center;
+    grid-area: 1 / 1 / 2 / 2;
+    margin: 10px 0 0 10px;
+    padding: 0;
+    background-color: inherit;
+    visibility: hidden;
+    cursor: pointer;
+    font-size: 20px;
+    width: 170px;
+    height: 20px;
+    resize: none;
+    border: none;
+    overflow: hidden;
+}
+
+.renamefolder:focus {
+    outline: none;
+}
+
+.buttons {
+    display: grid;
+    margin: 0 20px 0 0;
+    grid-template: 1fr / 1fr 1fr 1fr;
+    grid-area: 1 / 1 / 2 / 2;
+    width: 100px;
+    justify-self: end;
+    gap: 16px;
+}
+
+.rename {
     font-size: 24px;
     width: 26px;
     height: 26px;
     cursor: pointer;
     border-radius: 100%;
     border: none;
-}
-
-.rename {
-    margin-left: auto;
     font-size: 24px;
     display: grid;
     place-content: center;
+    background-color: inherit;
 }
 
 .remove {
+    font-size: 24px;
+    width: 26px;
+    height: 26px;
+    cursor: pointer;
+    border-radius: 100%;
+    border: none;
     font-size: 27px;
     display: grid;
     place-content: center;
-    transition: background-color ease 0.55s;;
+    transition: transform ease 0.55s;
+    background-color: inherit;
 }
 
-.removenote {
-    grid-area: 1 / 2 / 2 / 3;
-    font-size: 27px;
-    display: grid;
-    place-content: center;
-    transition: background-color ease-out 0.35s;;
-}
-
-.removenote:hover,
 .remove:hover {
-    transition: background-color ease-out 0.35s;;
-    background-color: #f92f60;
+    transition: transform ease 0.55s;
+    transform: rotate(360deg);
+}
+
+.add {
+    font-size: 24px;
+    width: 26px;
+    height: 26px;
+    cursor: pointer;
+    border-radius: 100%;
+    border: none;
+    font-size: 27px;
+    display: grid;
+    place-content: center;
+    transition: transform ease 0.55s;
+    background-color: inherit;
+}
+
+.add:hover {
+    transition: transform ease 0.55s;
+    transform: rotate(360deg);
 }
 
 .note {
+    border-radius: 10px;
+    padding: 10px;
     cursor: pointer;
     margin-left: 20px;
     word-break: break-all;
-    width: 100%;
+    width: 304px;
     display: grid;
+    gap: 16px;
     grid-template: 1fr / 1fr 26px;
     background-color: #c2fdff;
 }
@@ -143,9 +213,32 @@ body {
     background-color: #00f7ff;
 }
 
+.noteactive {
+    background-color: #00f7ff;
+}
+
+.removenote {
+    font-size: 24px;
+    width: 26px;
+    height: 26px;
+    cursor: pointer;
+    border-radius: 100%;
+    border: none;
+    grid-area: 1 / 2 / 2 / 3;
+    font-size: 27px;
+    display: grid;
+    place-content: center;
+    background-color: inherit;
+    transition: transform ease 0.55s;
+}
+
+.removenote:hover {
+    transition: transform ease 0.55s;
+    transform: rotate(360deg);
+}
+
 #note {
     display: grid;
-    box-sizing: border-box;
     height: 100%;
     width: 100%;
     grid-template: 127px 1fr 80px / 1fr;
@@ -153,7 +246,6 @@ body {
 }
 
 .notename {
-    box-sizing: border-box;
     justify-self: center;
     align-self: end;
     width: 100%;
@@ -175,7 +267,6 @@ body {
 }
 
 .maintext {
-    box-sizing: border-box;
     justify-self: center;
     padding: 20px;
     width: 100%;
@@ -194,22 +285,6 @@ body {
     box-shadow: 8px 2px 4px 0px #00000080;
 }
 
-.noteactive {
-    background-color: #00f7ff;
-}
-
-.add {
-    font-size: 27px;
-    display: grid;
-    place-content: center;
-    transition: transform ease 0.55s;
-}
-
-.add:hover {
-    transition: transform ease 0.55s;
-    transform: rotate(360deg);
-}
-
 .lastedited {
     display: grid;
     grid-template: 1fr 1fr / 1fr;
@@ -223,12 +298,16 @@ body {
     cursor: pointer;
 }
 
+.edited:hover + .created {
+    opacity: 1;
+    transition: opacity ease-in 0.35s;
+}
+
 .created {
     opacity: 0;
     transition: opacity ease-out 0.5s;
 }
 
-.edited:hover + .created {
-    opacity: 1;
-    transition: opacity ease-in 0.35s;
+.show {
+    visibility: visible;
 }
