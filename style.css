@@ -10,7 +10,7 @@
 }
 
 ::-webkit-scrollbar-track {
-    background: #dbdbdb; 
+    background: #eeeeee; 
 }
 
 ::-webkit-scrollbar-thumb {
@@ -41,7 +41,6 @@ body {
     padding: 10px 16px 0 10px;
     overflow-y: overlay;
     width: 100%;
-    box-shadow: 8px 0px 4px 0px #00000080;
 }
 
 #logo {
@@ -57,26 +56,42 @@ body {
     text-decoration-color: transparent;
 }
 
+#logo:hover + #heart {
+    opacity: 1;
+    transition: opacity ease-in-out 3.55s;
+}
+
+#heart {
+    opacity: 0;
+    font-size: 32px;
+    transition: opacity ease-out 0.5s;
+}
+
 #menu {
     margin-top: 25px;
     display: grid;
     gap: 6px;
     font-size: 24px;
+    position: sticky;
+    top: 0;
 }
 
 #folder {
     border-radius: 10px;
     padding: 10px;
     cursor: pointer;
-    background-color: #73ffa2;
+    background-color: #c1ffea;
+    transition: background-color ease 1s, transform 0.37s ease;
 }
 
 #folder:hover {
-    background-color: #00ff55;
+    transition: background-color ease-out 1.75s, transform 0.37 ease-out;
+    background-color: #00ffaa;
 }
 
 #folder:active {
-    transform: translatey(2px);
+    transition: transform 0.1s ease-out;
+    transform: translateY(10px);
 }
 
 #content {
@@ -89,20 +104,27 @@ body {
 }
 
 .folder {
-    background-color: #f4f4f4;
+    background-color: #fff;
     display: grid;
     grid-template: 40px 1fr / 1fr;
     grid-auto-rows: auto;
     gap: 6px;
     padding: 10px 10px 10px 0;
     border-radius: 10px;
+    overflow: hidden;
+    transition: box-shadow 0.22s ease;
+}
+
+.folder:hover {
+    transition: box-shadow 0.22s ease;
+    box-shadow: 4px 0px 2px 0px #00000080;
 }
 
 .foldername {
     grid-area: 1 / 1 / 2 / 2;
     align-self: center;
     width: 170px;
-    overflow-x: hidden;
+    overflow: hidden;
     text-overflow: ellipsis;
     margin: 0 0 0 10px;
     font-size: 20px;
@@ -110,17 +132,16 @@ body {
 }
 
 .foldername:hover {
-    order: 1;
-    overflow: visible; 
+    overflow-y: visible; 
     overflow-wrap: break-word;
 }
 
 .renamefolder {
     align-self: center;
     grid-area: 1 / 1 / 2 / 2;
-    margin: 10px 0 0 10px;
+    margin: 0 0 0 10px;
     padding: 0;
-    background-color: inherit;
+    background: transparent;
     visibility: hidden;
     cursor: pointer;
     font-size: 20px;
@@ -155,7 +176,32 @@ body {
     font-size: 24px;
     display: grid;
     place-content: center;
-    background-color: inherit;
+    background: transparent;
+    outline: none;
+}
+
+.rename:hover {
+    animation: draw 1s infinite;
+}
+
+@keyframes draw {
+    0% {
+        transform:  translateX(0px);
+        transform:  translateY(0px);
+    }
+
+    25% {
+        transform:  translateX(6px)
+    }
+
+    75% {
+        transform:  translateY(6px)
+    }
+
+    100% {
+        transform:  translateX(0px);
+        transform:  translateY(0px);
+    }
 }
 
 .remove {
@@ -169,7 +215,8 @@ body {
     display: grid;
     place-content: center;
     transition: transform ease 0.55s;
-    background-color: inherit;
+    background: transparent;
+    outline: none;
 }
 
 .remove:hover {
@@ -189,6 +236,7 @@ body {
     place-content: center;
     transition: transform ease 0.55s;
     background-color: inherit;
+    outline: none;
 }
 
 .add:hover {
@@ -206,15 +254,20 @@ body {
     display: grid;
     gap: 16px;
     grid-template: 1fr / 1fr 26px;
-    background-color: #c2fdff;
+    background-color: #f4ff53;
+    transition: background-color ease 1s;
+    transition: margin-left ease-out 0.25s;
 }
 
 .note:hover {
-    background-color: #00f7ff;
+    transition: background-color ease-out 0.45s;
+    transition: margin-left ease-out 0.25s;
+    background-color: #00d9ff;
 }
 
 .noteactive {
-    background-color: #00f7ff;
+    margin-left: 10px;
+    background-color: #00d9ff;
 }
 
 .removenote {
@@ -228,8 +281,9 @@ body {
     font-size: 27px;
     display: grid;
     place-content: center;
-    background-color: inherit;
+    background: transparent;
     transition: transform ease 0.55s;
+    outline: none;
 }
 
 .removenote:hover {
