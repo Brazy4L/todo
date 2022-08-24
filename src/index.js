@@ -10,7 +10,7 @@ const Run = (() => {
         [
             {
                 'name': 'Click this note.',
-                'description': 'Hi!\n\n              Create folders by clicking "+ Folder"\n              Create notes by clicking green "+"\n\nHave fun!',
+                'description': 'Hi!\n\n\n              Create folders by clicking "+ Folder"\n\n              Create notes by clicking ✖️\n\n              Rename folder by clicking ✏️\n\n              Delete folder and its content by clicking ➖\n\n              Delete individual note by clicking ➖ next to it\n\n\n                                                                         Have fun!',
                 'created': '',
                 'lastedited': ''
             },
@@ -59,6 +59,7 @@ const Run = (() => {
                     foldername.innerText = renamefolder.value;
                     rename.innerText = '✏️';
                 } else {
+                    foldername.innerText = '';
                     renamefolder.value = folders[i].name;
                     renamefolder.classList.add('show');
                     renamefolder.focus();
@@ -165,31 +166,30 @@ const Run = (() => {
                     folders[i].notes[j].lastedited = format(new Date(), "yyyy-MM-dd HH:mm:ss");
                     edited.innerText = 'Edited:' + `${'\xa0'.repeat(3)}` + folders[i].notes[j].lastedited;
                     setItems();
+                    console.log(folders);
                 });
             }
         }
     }
 
 
-    const createFolder = (name, num) => {
+    const createFolder = (num) => {
         const newFolder = () => {
             notes.push([],);
             return notes[num];
         }
         return {
-            'name': name,
+            'name': '',
             'notes': newFolder()
         }
     }
 
     const addFolder = () => {
-        let name = prompt('Name:');
-        if (name === null) {
-        } else { 
-            let l = folders.length;
-            folders.push(createFolder(name, l));
-            showFolders();
-        }
+        let l = folders.length;
+        folders.push(createFolder(l));
+        showFolders();
+        let clickRename = document.querySelector(`#content > div:nth-child(${l + 1}) > div.buttons > button.rename`)
+        clickRename.click();
     }
 
     document.getElementById('folder').addEventListener('click', () => {
