@@ -255,13 +255,11 @@ body {
     gap: 16px;
     grid-template: 1fr / 1fr 26px;
     background-color: #f4ff53;
-    transition: background-color ease 1s;
-    transition: margin-left ease-out 0.25s;
+    transition: background-color ease 1s, margin-left ease-out 0.25s;
 }
 
 .note:hover {
-    transition: background-color ease-out 0.45s;
-    transition: margin-left ease-out 0.25s;
+    transition: background-color ease-out 0.45s, margin-left ease-out 0.25s;
     background-color: #00d9ff;
 }
 
